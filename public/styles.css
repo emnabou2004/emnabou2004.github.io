@@ -1,0 +1,179 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f4ef;
+  --text: #222222;
+  --muted: #6a6a6a;
+  --border: #dcd8d0;
+  --panel: #faf9f5;
+  --accent: #efe8dc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.page-shell {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 36px 24px 64px;
+}
+
+.hero {
+  padding: 8px 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: 2.1rem;
+  margin: 0 0 8px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.intro, .hint {
+  color: var(--muted);
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+.composer, .latest {
+  border: 1px solid var(--border);
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  background: var(--panel);
+}
+
+.composer-head, .latest-head {
+  margin-bottom: 12px;
+}
+
+.editor-form {
+  display: grid;
+  gap: 10px;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  padding: 10px 12px;
+  font: inherit;
+  border-radius: 6px;
+}
+
+textarea {
+  min-height: 220px;
+  resize: vertical;
+}
+
+.editor-actions, .inline-upload {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+button, .upload-pill {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  padding: 8px 12px;
+  font: inherit;
+  border-radius: 6px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover, .upload-pill:hover {
+  background: var(--accent);
+}
+
+.upload-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-pill input {
+  display: none;
+}
+
+.post-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.card {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.card a {
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.card a:hover {
+  opacity: 0.8;
+}
+
+.article {
+  padding: 16px 0;
+}
+
+.article h1 {
+  font-size: 1.7rem;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.article time {
+  color: var(--muted);
+}
+
+.article-content {
+  margin-top: 14px;
+}
+
+.article-content img {
+  max-width: 100%;
+}
+
+code {
+  background: #f0ece3;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.katex-display {
+  overflow-x: auto;
+}

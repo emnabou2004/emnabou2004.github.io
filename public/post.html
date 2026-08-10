@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <a href="/">← Back</a>
+      <article class="article">
+        <h1 id="title"></h1>
+        <time id="date"></time>
+        <div id="content" class="article-content"></div>
+      </article>
+    </main>
+    <script>
+      const slug = window.location.pathname.split('/').pop();
+      fetch(`/api/posts/${slug}`)
+        .then((response) => response.json())
+        .then((post) => {
+          document.title = post.title;
+          document.getElementById('title').textContent = post.title;
+          document.getElementById('date').textContent = post.date;
+          document.getElementById('content').innerHTML = post.content;
+        });
+    </script>
+  </body>
+</html>
