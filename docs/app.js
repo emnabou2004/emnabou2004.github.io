@@ -1,17 +1,21 @@
-function renderCard(post, pdfLinks) {
+function renderCard(post, pdfHref) {
+  const titleHtml = pdfHref
+    ? `<a href="${pdfHref}" target="_blank" rel="noopener">${post.title}</a>`
+    : post.title;
   return `
     <div class="card">
-      <p class="post-date">${post.date}</p>
-      <h3>${post.title}</h3>
+      <div class="card-head">
+        <h3>${titleHtml}</h3>
+        <p class="post-date">${post.date}</p>
+      </div>
       ${post.description ? `<p>${post.description}</p>` : ''}
-      ${pdfLinks}
     </div>
   `;
 }
 
-function renderList(host, posts, pdfLinks) {
+function renderList(host, posts, pdfHref) {
   host.innerHTML = posts.length
-    ? posts.map((post) => renderCard(post, pdfLinks)).join('')
+    ? posts.map((post) => renderCard(post, pdfHref)).join('')
     : '<p>No posts yet.</p>';
 }
 
@@ -22,15 +26,13 @@ async function loadContent() {
   const posts = await postsRes.json();
   const pdfs = await pdfsRes.json();
 
-  const pdfLinks = pdfs.length
-    ? pdfs.map((pdf) => `<a href="${pdf.path}" target="_blank" rel="noopener">${pdf.name}</a>`).join('')
-    : '';
+  const pdfHref = pdfs.length ? pdfs[0].path : null;
 
   const projectPosts = posts.filter((post) => post.category === 'projects');
   const blogPosts = posts.filter((post) => post.category !== 'projects');
 
-  renderList(projectsHost, projectPosts, pdfLinks);
-  renderList(blogHost, blogPosts, '');
+  renderList(projectsHost, projectPosts, pdfHref);
+  renderList(blogHost, blogPosts, null);
 }
 
 const editorForm = document.getElementById('editor-form');

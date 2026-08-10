@@ -124,6 +124,13 @@ button:hover, .upload-pill:hover {
   background: transparent;
 }
 
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
 .card h3 {
   margin: 0;
   font-size: 1rem;
@@ -134,16 +141,16 @@ button:hover, .upload-pill:hover {
   margin: 0;
   color: var(--muted);
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 .card a {
   color: var(--text);
-  font-size: 0.95rem;
-  margin-top: 4px;
+  text-decoration: none;
 }
 
 .card a:hover {
-  opacity: 0.8;
+  text-decoration: underline;
 }
 
 .article {
