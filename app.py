@@ -52,7 +52,8 @@ def get_post_metadata(post_path: Path):
         'slug': slug,
         'title': frontmatter.get('title', slug.replace('-', ' ').title()),
         'description': frontmatter.get('description', ''),
-        'date': frontmatter.get('date', post_path.stat().st_mtime)
+        'date': frontmatter.get('date', post_path.stat().st_mtime),
+        'category': frontmatter.get('category', 'blog')
     }
 
 
@@ -66,6 +67,7 @@ def get_post_payload(post_path: Path):
         'title': frontmatter.get('title', slug.replace('-', ' ').title()),
         'description': frontmatter.get('description', ''),
         'date': frontmatter.get('date', post_path.stat().st_mtime),
+        'category': frontmatter.get('category', 'blog'),
         'content': html
     }
 

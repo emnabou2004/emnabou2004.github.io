@@ -1,5 +1,23 @@
+function renderCard(post, pdfLinks) {
+  return `
+    <div class="card">
+      <p class="post-date">${post.date}</p>
+      <h3>${post.title}</h3>
+      ${post.description ? `<p>${post.description}</p>` : ''}
+      ${pdfLinks}
+    </div>
+  `;
+}
+
+function renderList(host, posts, pdfLinks) {
+  host.innerHTML = posts.length
+    ? posts.map((post) => renderCard(post, pdfLinks)).join('')
+    : '<p>No posts yet.</p>';
+}
+
 async function loadContent() {
-  const postsHost = document.getElementById('posts-list');
+  const projectsHost = document.getElementById('posts-list');
+  const blogHost = document.getElementById('blog-posts-list');
   const [postsRes, pdfsRes] = await Promise.all([fetch('/api/posts'), fetch('/api/pdfs')]);
   const posts = await postsRes.json();
   const pdfs = await pdfsRes.json();
@@ -8,20 +26,11 @@ async function loadContent() {
     ? pdfs.map((pdf) => `<a href="${pdf.path}" target="_blank" rel="noopener">${pdf.name}</a>`).join('')
     : '';
 
-  postsHost.innerHTML = posts.length
-    ? posts
-        .map(
-          (post) => `
-            <div class="card">
-              <p class="post-date">${post.date}</p>
-              <h3>${post.title}</h3>
-              ${post.description ? `<p>${post.description}</p>` : ''}
-              ${pdfLinks}
-            </div>
-          `
-        )
-        .join('')
-    : '<p>No posts yet.</p>';
+  const projectPosts = posts.filter((post) => post.category === 'projects');
+  const blogPosts = posts.filter((post) => post.category !== 'projects');
+
+  renderList(projectsHost, projectPosts, pdfLinks);
+  renderList(blogHost, blogPosts, '');
 }
 
 const editorForm = document.getElementById('editor-form');

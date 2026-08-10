@@ -58,6 +58,7 @@ function getPostData(fileName) {
     title: frontmatter.title || slug.replace(/-/g, ' '),
     description: frontmatter.description || 'A math note.',
     date: frontmatter.date || new Date(fs.statSync(filePath).mtimeMs).toISOString().slice(0, 10),
+    category: frontmatter.category || 'blog',
     content: renderMarkdown(body)
   };
 }
@@ -100,7 +101,8 @@ app.get('/api/posts', (req, res) => {
       slug,
       title: frontmatter.title || slug.replace(/-/g, ' '),
       description: frontmatter.description || 'A math note.',
-      date: frontmatter.date || new Date(fs.statSync(filePath).mtimeMs).toISOString().slice(0, 10)
+      date: frontmatter.date || new Date(fs.statSync(filePath).mtimeMs).toISOString().slice(0, 10),
+      category: frontmatter.category || 'blog'
     };
   });
   res.json(posts);
