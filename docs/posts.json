@@ -1,9 +1,18 @@
 [
   {
+    "slug": "research-internship-in-algebraic-analysis",
+    "title": "Research internship in algebraic analysis",
+    "description": "",
+    "date": "2026-09-21",
+    "category": "projects",
+    "pdf": "rapport_stage_21-09.pdf"
+  },
+  {
     "slug": "bachelor-project-statistics-of-number-fields-february-to-may-2026",
     "title": "Bachelor project : Statistics of number fields",
     "description": "",
     "date": "2026-07-17",
-    "category": "projects"
+    "category": "projects",
+    "pdf": ""
   }
 ]

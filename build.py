@@ -35,7 +35,8 @@ def build_posts():
             'title': frontmatter.get('title', slug.replace('-', ' ')),
             'description': frontmatter.get('description', ''),
             'date': frontmatter.get('date', ''),
-            'category': frontmatter.get('category', 'blog')
+            'category': frontmatter.get('category', 'blog'),
+            'pdf': frontmatter.get('pdf', '')
         })
     posts.sort(key=lambda p: p['date'], reverse=True)
     return posts

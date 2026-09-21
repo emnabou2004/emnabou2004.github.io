@@ -1,6 +1,7 @@
-function renderCard(post, pdfHref) {
-  const titleHtml = pdfHref
-    ? `<a href="${pdfHref}" target="_blank" rel="noopener">${post.title}</a>`
+function renderCard(post, pdfs) {
+  const pdf = pdfs.find((item) => item.name === post.pdf);
+  const titleHtml = pdf
+    ? `<a href="${pdf.path}" target="_blank" rel="noopener">${post.title}</a>`
     : post.title;
   return `
     <div class="card">
@@ -13,9 +14,9 @@ function renderCard(post, pdfHref) {
   `;
 }
 
-function renderList(host, posts, pdfHref) {
+function renderList(host, posts, pdfs) {
   host.innerHTML = posts.length
-    ? posts.map((post) => renderCard(post, pdfHref)).join('')
+    ? posts.map((post) => renderCard(post, pdfs)).join('')
     : '<p>No posts yet.</p>';
 }
 
@@ -26,13 +27,11 @@ async function loadContent() {
   const posts = await postsRes.json();
   const pdfs = await pdfsRes.json();
 
-  const pdfHref = pdfs.length ? pdfs[0].path : null;
-
   const projectPosts = posts.filter((post) => post.category === 'projects');
   const blogPosts = posts.filter((post) => post.category !== 'projects');
 
-  renderList(projectsHost, projectPosts, pdfHref);
-  renderList(blogHost, blogPosts, null);
+  renderList(projectsHost, projectPosts, pdfs);
+  renderList(blogHost, blogPosts, pdfs);
 }
 
 const editorForm = document.getElementById('editor-form');
